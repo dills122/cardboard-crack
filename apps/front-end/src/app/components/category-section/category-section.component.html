@@ -1,0 +1,35 @@
+<div>
+  <!-- <h3>{{categoryName}}</h3>
+  <p-divider></p-divider> -->
+  <div class="flex justify-center mb-4">
+    <p-selectbutton
+      [options]="sizes"
+      [(ngModel)]="selectedSize"
+      [multiple]="false"
+      optionLabel="name"
+      optionValue="value"
+    />
+  </div>
+  <p-table
+    [value]="cards"
+    stripedRows
+    [size]="selectedSize"
+  >
+    <ng-template #header>
+      <tr>
+        <th>Card Number</th>
+        <th>Player</th>
+        <th>Club</th>
+        <th>Status</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-card>
+      <tr>
+        <td>{{ card.cardNumber }}</td>
+        <td>{{ card.player }}</td>
+        <td>{{ card.club }}</td>
+        <td>{{ card.type }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
