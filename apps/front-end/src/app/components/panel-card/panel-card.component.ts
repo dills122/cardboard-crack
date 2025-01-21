@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-panel-card',
@@ -12,4 +13,6 @@ export class PanelCardComponent {
     required: true,
   })
   header!: string;
+  @Input()
+  toggleHeader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 }

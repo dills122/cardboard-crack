@@ -1,0 +1,9 @@
+<app-panel-card
+*ngFor="let card of categories | keyvalue; index as i"
+[header]="card.key"
+>
+<app-category-section
+  [cards]="card.value"
+  [categoryName]="card.key"
+></app-category-section>
+</app-panel-card>

@@ -23,7 +23,8 @@
     "zone.js": "~0.15.0",
     "primeng": "~19.0.5",
     "@primeng/themes": "~19.0.5",
-    "@angular/cdk": "~19.1.0"
+    "@angular/cdk": "~19.1.0",
+    "pdfjs-dist": "~4.10.38"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.7",

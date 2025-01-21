@@ -1,5 +1,5 @@
 <div class="card my-4">
-    <p-panel [header]="header" [toggleable]="true" [toggler]="'header'">
+    <p-panel [header]="header" [toggleable]="toggleHeader | async" [toggler]="'header'">
         <ng-content></ng-content>
     </p-panel>
   </div>
