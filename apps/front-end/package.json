@@ -24,7 +24,8 @@
     "primeng": "~19.0.5",
     "@primeng/themes": "~19.0.5",
     "@angular/cdk": "~19.1.0",
-    "pdfjs-dist": "~4.10.38"
+    "pdfjs-dist": "~4.10.38",
+    "fuse.js": "~7.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.7",

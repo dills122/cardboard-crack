@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
+import { PdfParserService } from '../../modules/pdf/services/pdf-parser.service';
 
+interface ProductOptions {
+  name: string;
+  code: string;
+}
 @Component({
   selector: 'app-ingest',
   standalone: false,
@@ -10,12 +15,24 @@ import * as pdfjsLib from 'pdfjs-dist';
 })
 export class IngestComponent {
   extractedText: string = '';
+  options: ProductOptions[] = [
+    {
+      name: 'International Only',
+      code: 'INIT',
+    },
+    {
+      name: 'Club & Country',
+      code: 'REG',
+    },
+  ];
+  selectedOption: ProductOptions | undefined = this.options[1];
 
-  constructor() {
+  constructor(private pdfParserService: PdfParserService) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   }
 
   onFileSelected(event: Event): void {
+    console.log(`selectedOption -- ${this.selectedOption}`);
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
@@ -31,25 +48,13 @@ export class IngestComponent {
   }
 
   async extractTextFromPdf(pdfData: Uint8Array): Promise<void> {
-    const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-    let extractedText = '';
+    try {
+      const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+      const data = await this.pdfParserService.parseData(pdf, false); //TODO add DDL to select if International or not
 
-    // Loop through all pages
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const textContent = await page.getTextContent();
-
-      //This looks like the same parsing as the CLI so should be able to lift & shift this over
-      const pageText = textContent.items
-        .map((item: any) => {
-          // console.log(`Line or String: -- ${item.str}`);
-          return item.str;
-        })
-        .join(' ');
-
-      extractedText += `Page ${i}:\n${pageText}\n\n`;
+      this.extractedText = JSON.stringify(data, null, 4);
+    } catch (err) {
+      console.error(err);
     }
-
-    this.extractedText = extractedText;
   }
 }

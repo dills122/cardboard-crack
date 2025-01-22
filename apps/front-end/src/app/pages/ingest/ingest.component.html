@@ -1,7 +1,33 @@
-<div>
-    <input type="file" (change)="onFileSelected($event)" accept="application/pdf" />
+<p-panel
+  header="Parse and Verify PDF"
+  class="flex flex-col text-center justify-center p-2"
+>
+  <div class="p-2">
+    <p>This parser is only designed/supports Topps PDF based checklists.</p>
+    <div class="p-4">
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="application/pdf"
+      />
+    </div>
+    <div class="p-2">
+      <p-select
+        [options]="options"
+        [(ngModel)]="selectedOption"
+        optionLabel="name"
+        placeholder="Select a Product Type"
+        class="w-full md:w-56"
+      />
+    </div>
   </div>
-  <div>
-    <textarea rows="10" cols="50" [(ngModel)]="extractedText" readonly></textarea>
+  <p-divider />
+  <div class="p-2">
+    <textarea
+      rows="30"
+      cols="75"
+      [(ngModel)]="extractedText"
+      readonly
+    ></textarea>
   </div>
-  
+</p-panel>

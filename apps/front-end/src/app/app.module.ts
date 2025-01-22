@@ -19,6 +19,8 @@ import { PanelCardComponent } from './components/panel-card/panel-card.component
 import { AcronymPipe } from './pipes/acronym.pipe';
 import { IngestComponent } from './pages/ingest/ingest.component';
 import { ListComponent } from './pages/list/list.component';
+import { PdfModule } from './modules/pdf/pdf.module';
+import { SelectModule } from 'primeng/select';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ListComponent } from './pages/list/list.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PdfModule,
     //NGPRIME MODULES
     TableModule,
     SelectButtonModule,
@@ -43,6 +46,7 @@ import { ListComponent } from './pages/list/list.component';
     DividerModule,
     PanelModule,
     ScrollTopModule,
+    SelectModule,
   ],
   providers: [
     provideAnimationsAsync(),
