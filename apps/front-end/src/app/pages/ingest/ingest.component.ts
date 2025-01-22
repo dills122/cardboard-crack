@@ -32,7 +32,6 @@ export class IngestComponent {
   }
 
   onFileSelected(event: Event): void {
-    console.log(`selectedOption -- ${this.selectedOption}`);
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
@@ -50,8 +49,10 @@ export class IngestComponent {
   async extractTextFromPdf(pdfData: Uint8Array): Promise<void> {
     try {
       const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-      const data = await this.pdfParserService.parseData(pdf, false); //TODO add DDL to select if International or not
-
+      const data = await this.pdfParserService.parseData(
+        pdf,
+        this.selectedOption?.code === 'INIT'
+      );
       this.extractedText = JSON.stringify(data, null, 4);
     } catch (err) {
       console.error(err);
