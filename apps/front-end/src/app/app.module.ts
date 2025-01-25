@@ -21,7 +21,12 @@ import { IngestComponent } from './pages/ingest/ingest.component';
 import { ListComponent } from './pages/list/list.component';
 import { PdfModule } from './modules/pdf/pdf.module';
 import { SelectModule } from 'primeng/select';
+import { MessageModule } from 'primeng/message';
 import { JsonEditorComponent } from './components/json-editor/json-editor.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ButtonModule } from 'primeng/button';
+import { provideHttpClient } from '@angular/common/http';
+import { ToppsDisclaimerComponent } from './components/topps-disclaimer/topps-disclaimer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,7 @@ import { JsonEditorComponent } from './components/json-editor/json-editor.compon
     AcronymPipe,
     ListComponent,
     JsonEditorComponent,
+    ToppsDisclaimerComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,9 @@ import { JsonEditorComponent } from './components/json-editor/json-editor.compon
     PanelModule,
     ScrollTopModule,
     SelectModule,
+    MessageModule,
+    FileUploadModule,
+    ButtonModule,
   ],
   providers: [
     provideAnimationsAsync(),
@@ -57,6 +66,7 @@ import { JsonEditorComponent } from './components/json-editor/json-editor.compon
         preset: Aura,
       },
     }),
+    provideHttpClient(),
   ],
   bootstrap: [AppComponent],
 })

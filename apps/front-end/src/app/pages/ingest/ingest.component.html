@@ -1,17 +1,36 @@
-<p-panel
-  header="Parse and Verify PDF"
-  class="flex flex-col text-center justify-center p-2"
->
-  <div class="p-2">
-    <p>This parser is only designed/supports Topps PDF based checklists.</p>
-    <div class="p-4">
-      <input
-        type="file"
-        (change)="onFileSelected($event)"
+<h2 class="p-4 text-xl font-bold">Upload Checklist for Parsing</h2>
+<p-panel class="flex flex-col text-center justify-center p-6 w-full space-y-6">
+  <p-message severity="info" class="text-lg">
+    This parser is only designed to support Topps PDF-based checklists at this
+    time. Ensure that your file meets the expected format.
+  </p-message>
+
+  <div class="text-left mt-6 space-y-4">
+    <h3 class="text-lg font-semibold">Instructions:</h3>
+    <ul class="list-disc list-inside space-y-2 text-sm">
+      <li>Click the "Upload File" button below to select a PDF checklist.</li>
+      <li>Choose the appropriate product type from the dropdown menu.</li>
+      <li>
+        Once uploaded, verify and edit the parsed data in the editor below.
+      </li>
+    </ul>
+  </div>
+
+  <div
+    class="flex flex-col md:flex-row justify-center items-center py-6 space-y-4 md:space-y-0 md:space-x-8 w-full"
+  >
+    <div class="w-full md:w-auto">
+      <p-fileUpload
+        name="pdf"
         accept="application/pdf"
-      />
+        (onSelect)="onFileSelected($event)"
+        customUpload="true"
+        [auto]="true"
+        [showUploadButton]="false"
+        class="w-full"
+      ></p-fileUpload>
     </div>
-    <div class="p-2">
+    <div class="w-full md:w-auto">
       <p-select
         [options]="options"
         [(ngModel)]="selectedOption"
@@ -21,11 +40,62 @@
       />
     </div>
   </div>
-</p-panel>
-<div>
-  <div class="p-2">
-    <ng-container>
-      <app-json-editor [inputData]="extractedText"></app-json-editor>
-    </ng-container>
+
+  <div class="text-sm m-4">
+    <p>
+      If you encounter any issues during parsing, ensure the uploaded file
+      matches the format requirements or contact support for assistance.
+    </p>
   </div>
+</p-panel>
+
+<p-divider class="my-8"></p-divider>
+
+<h2 class="p-4 text-xl font-bold">Verify & Edit Parsed Checklist</h2>
+<div class="mb-6 px-6 space-y-6">
+  <p class="text-left">
+    Below is the parsed checklist data. Please review and make any necessary
+    edits. Once you're satisfied, you can export the final version for your
+    records.
+  </p>
+
+  <div class="mt-6">
+    <p-panel header="Keyboard Shortcuts" [collapsed]="true" [toggleable]="true">
+      <div class="p-4">
+        <p class="mb-4 text-sm">
+          Use the following shortcuts to enhance your workflow in the editor:
+        </p>
+        <ul class="space-y-3 text-sm">
+          <li>
+            <strong>Toggle Fullscreen Mode:</strong>
+            <div>
+              <span class="block">Windows/Linux: <kbd>F11</kbd></span>
+              <span class="block">Mac: <kbd>Command</kbd> + <kbd>K</kbd></span>
+            </div>
+          </li>
+          <li>
+            <strong>View Keyboard Shortcuts Menu:</strong>
+            <div>
+              <span class="block"
+                >Windows/Linux: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> +
+                <kbd>H</kbd></span
+              >
+              <span class="block"
+                >Mac: <kbd>Command</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd></span
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </p-panel>
+  </div>
+</div>
+
+<div class="p-4">
+  <ng-container>
+    <app-json-editor [inputData]="extractedText"></app-json-editor>
+  </ng-container>
+</div>
+<div class="p-4">
+  <app-topps-disclaimer></app-topps-disclaimer>
 </div>

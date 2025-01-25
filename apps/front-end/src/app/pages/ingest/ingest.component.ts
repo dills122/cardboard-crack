@@ -31,10 +31,24 @@ export class IngestComponent {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
+  // onFileSelected(event: any): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files[0]) {
+  //     const file = input.files[0];
+  //     const fileReader = new FileReader();
+
+  //     fileReader.onload = () => {
+  //       const typedArray = new Uint8Array(fileReader.result as ArrayBuffer);
+  //       this.extractTextFromPdf(typedArray);
+  //     };
+
+  //     fileReader.readAsArrayBuffer(file);
+  //   }
+  // }
+
+  onFileSelected(event: any): void {
+    const file = event.files[0]; // event.files comes from PrimeNG file upload
+    if (file) {
       const fileReader = new FileReader();
 
       fileReader.onload = () => {
