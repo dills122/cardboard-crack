@@ -21,13 +21,11 @@
       />
     </div>
   </div>
-  <p-divider />
-  <div class="p-2">
-    <textarea
-      rows="30"
-      cols="75"
-      [(ngModel)]="extractedText"
-      readonly
-    ></textarea>
-  </div>
 </p-panel>
+<div>
+  <div class="p-2">
+    <ng-container>
+      <app-json-editor [inputData]="extractedText"></app-json-editor>
+    </ng-container>
+  </div>
+</div>

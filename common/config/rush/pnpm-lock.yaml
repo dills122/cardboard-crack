@@ -40,6 +40,9 @@ importers:
       '@primeng/themes':
         specifier: ~19.0.5
         version: 19.0.5
+      ace-builds:
+        specifier: ~1.37.5
+        version: 1.37.5
       fuse.js:
         specifier: ~7.0.0
         version: 7.0.0
@@ -3366,6 +3369,10 @@ packages:
       mime-types: 2.1.35
       negotiator: 0.6.3
     dev: true
+
+  /ace-builds@1.37.5:
+    resolution: {integrity: sha512-VMJ4Cnhq6L9dwvOCyuyyvQuiVTSwdZC7zDKJBBBJJax0wGQ7MvzQZFoi0gMmCm2I4Zuv/ZbtwU/dlglIhCNLhw==}
+    dev: false
 
   /acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}

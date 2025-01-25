@@ -21,6 +21,7 @@ import { IngestComponent } from './pages/ingest/ingest.component';
 import { ListComponent } from './pages/list/list.component';
 import { PdfModule } from './modules/pdf/pdf.module';
 import { SelectModule } from 'primeng/select';
+import { JsonEditorComponent } from './components/json-editor/json-editor.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SelectModule } from 'primeng/select';
     //PIPES
     AcronymPipe,
     ListComponent,
+    JsonEditorComponent,
   ],
   imports: [
     BrowserModule,
