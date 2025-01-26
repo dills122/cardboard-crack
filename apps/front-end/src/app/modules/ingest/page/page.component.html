@@ -1,20 +1,12 @@
 <h2 class="p-4 text-xl font-bold">Upload Checklist for Parsing</h2>
-<p-panel class="flex flex-col text-center justify-center p-6 w-full space-y-6">
+
+<p-panel class="flex flex-col text-center justify-center w-full space-y-6 pb-4">
   <p-message severity="info" class="text-lg">
     This parser is only designed to support Topps PDF-based checklists at this
     time. Ensure that your file meets the expected format.
   </p-message>
 
-  <div class="text-left mt-6 space-y-4">
-    <h3 class="text-lg font-semibold">Instructions:</h3>
-    <ul class="list-disc list-inside space-y-2 text-sm">
-      <li>Click the "Upload File" button below to select a PDF checklist.</li>
-      <li>Choose the appropriate product type from the dropdown menu.</li>
-      <li>
-        Once uploaded, verify and edit the parsed data in the editor below.
-      </li>
-    </ul>
-  </div>
+  <app-parser-instructions></app-parser-instructions>
 
   <div
     class="flex flex-col md:flex-row justify-center items-center py-6 space-y-4 md:space-y-0 md:space-x-8 w-full"
@@ -41,6 +33,21 @@
     </div>
   </div>
 
+  <!-- Centered Parse Button -->
+  <div class="flex justify-center">
+    <button
+      pButton
+      type="button"
+      label="Parse PDF"
+      class="p-button-primary"
+      pTooltip="Select File & Checklist Type"
+      tooltipPosition="bottom"
+      [tooltipDisabled]="!shouldDisableParseButton()"
+      [disabled]="shouldDisableParseButton()"
+      (click)="onParsePdf()"
+    ></button>
+  </div>
+
   <div class="text-sm m-4">
     <p>
       If you encounter any issues during parsing, ensure the uploaded file
@@ -60,35 +67,19 @@
   </p>
 
   <div class="mt-6">
-    <p-panel header="Keyboard Shortcuts" [collapsed]="true" [toggleable]="true">
-      <div class="p-4">
-        <p class="mb-4 text-sm">
-          Use the following shortcuts to enhance your workflow in the editor:
-        </p>
-        <ul class="space-y-3 text-sm">
-          <li>
-            <strong>Toggle Fullscreen Mode:</strong>
-            <div>
-              <span class="block">Windows/Linux: <kbd>F11</kbd></span>
-              <span class="block">Mac: <kbd>Command</kbd> + <kbd>K</kbd></span>
-            </div>
-          </li>
-          <li>
-            <strong>View Keyboard Shortcuts Menu:</strong>
-            <div>
-              <span class="block"
-                >Windows/Linux: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> +
-                <kbd>H</kbd></span
-              >
-              <span class="block"
-                >Mac: <kbd>Command</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd></span
-              >
-            </div>
-          </li>
-        </ul>
-      </div>
-    </p-panel>
+    <app-keyboard-shortcuts-panel></app-keyboard-shortcuts-panel>
   </div>
+
+  <!-- 
+  TODO Need to add a Finalize Edit OR Export Button Here, opens to a confirm modal
+  Probably should add in a way to add a custom name to the exported file
+
+  Idea: Button Export -> Opens to a Export Modal, User can enter file name -> Confirm/Exit
+  Generates/Downloads the JSON file
+
+  Future:
+  Export Zip - Contains the JSON, Original File, Validation File
+    -->
 </div>
 
 <div class="p-4">

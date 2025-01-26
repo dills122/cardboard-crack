@@ -73,6 +73,7 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.aceEditor && changes['inputData']) {
       this.aceEditor.session.setValue(this.inputData || '');
+      this.aceEditor.setReadOnly(false);
     }
   }
 
@@ -86,6 +87,8 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
       theme: 'ace/theme/twilight',
       mode: 'ace/mode/javascript',
     });
+
+    this.aceEditor.setReadOnly(true);
 
     // Add Fullscreen Toggle Command
     this.aceEditor.commands.addCommand({

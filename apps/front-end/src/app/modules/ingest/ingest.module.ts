@@ -6,7 +6,7 @@ import { SelectModule } from 'primeng/select';
 import { MessageModule } from 'primeng/message';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
-import { provideHttpClient } from '@angular/common/http';
+import { TooltipModule } from 'primeng/tooltip';
 import { DividerModule } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { ScrollTopModule } from 'primeng/scrolltop';
@@ -15,9 +15,16 @@ import { JsonEditorComponent } from './components/json-editor/json-editor.compon
 import { PdfModule } from '../pdf/pdf.module';
 import { ToppsDisclaimerComponent } from '../../components/topps-disclaimer/topps-disclaimer.component';
 import { IngestRoutingModule } from './ingest-routing.module';
+import { KeyboardShortcutsPanelComponent } from './components/keyboard-shortcuts-panel/keyboard-shortcuts-panel.component';
+import { ParserInstructionsComponent } from './components/parser-instructions/parser-instructions.component';
 
 @NgModule({
-  declarations: [PageComponent, JsonEditorComponent],
+  declarations: [
+    PageComponent,
+    JsonEditorComponent,
+    KeyboardShortcutsPanelComponent,
+    ParserInstructionsComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,6 +36,7 @@ import { IngestRoutingModule } from './ingest-routing.module';
     MessageModule,
     FileUploadModule,
     ButtonModule,
+    TooltipModule,
     ToppsDisclaimerComponent,
     IngestRoutingModule,
   ],

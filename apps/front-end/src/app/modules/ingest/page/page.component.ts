@@ -27,38 +27,30 @@ export class PageComponent {
     },
   ];
   selectedOption: ProductOptions | undefined = this.options[1];
+  selectedFilePointer: any;
 
   constructor(private pdfParserService: PdfParserService) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   }
 
-  // onFileSelected(event: any): void {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files[0]) {
-  //     const file = input.files[0];
-  //     const fileReader = new FileReader();
-
-  //     fileReader.onload = () => {
-  //       const typedArray = new Uint8Array(fileReader.result as ArrayBuffer);
-  //       this.extractTextFromPdf(typedArray);
-  //     };
-
-  //     fileReader.readAsArrayBuffer(file);
-  //   }
-  // }
-
   onFileSelected(event: any): void {
     const file = event.files[0]; // event.files comes from PrimeNG file upload
     if (file) {
-      const fileReader = new FileReader();
-
-      fileReader.onload = () => {
-        const typedArray = new Uint8Array(fileReader.result as ArrayBuffer);
-        this.extractTextFromPdf(typedArray);
-      };
-
-      fileReader.readAsArrayBuffer(file);
+      this.selectedFilePointer = file;
     }
+  }
+
+  onParsePdf() {
+    if (!this.selectedFilePointer) return;
+
+    const fileReader = new FileReader();
+
+    fileReader.onload = () => {
+      const typedArray = new Uint8Array(fileReader.result as ArrayBuffer);
+      this.extractTextFromPdf(typedArray);
+    };
+
+    fileReader.readAsArrayBuffer(this.selectedFilePointer);
   }
 
   async extractTextFromPdf(pdfData: Uint8Array): Promise<void> {
@@ -72,5 +64,9 @@ export class PageComponent {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  shouldDisableParseButton(): boolean {
+    return !this.selectedFilePointer;
   }
 }
