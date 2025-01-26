@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
 import { PdfParserService } from '../../pdf/services/pdf-parser.service';
+import PAGE_CONSTS from '../constants/page.consts';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ExportDialogComponent } from '../components/export-dialog/export-dialog.component';
 
 interface ProductOptions {
   name: string;
@@ -28,8 +31,12 @@ export class PageComponent {
   ];
   selectedOption: ProductOptions | undefined = this.options[1];
   selectedFilePointer: any;
+  consts = PAGE_CONSTS;
 
-  constructor(private pdfParserService: PdfParserService) {
+  constructor(
+    private pdfParserService: PdfParserService,
+    private dialogService: DialogService
+  ) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   }
 
@@ -66,7 +73,19 @@ export class PageComponent {
     }
   }
 
+  openExportDialog() {
+    this.dialogService.open(ExportDialogComponent, {
+      header: 'Export Data',
+      width: '30%',
+      data: { csvString: this.extractedText },
+    });
+  }
+
   shouldDisableParseButton(): boolean {
     return !this.selectedFilePointer;
+  }
+
+  shouldDisableExport(): boolean {
+    return !this.extractedText || this.extractedText.length <= 0;
   }
 }
