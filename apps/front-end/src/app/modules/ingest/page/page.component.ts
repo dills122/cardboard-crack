@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
-import { PdfParserService } from '../../modules/pdf/services/pdf-parser.service';
+import { PdfParserService } from '../../pdf/services/pdf-parser.service';
 
 interface ProductOptions {
   name: string;
   code: string;
 }
+
 @Component({
-  selector: 'app-ingest',
+  selector: 'app-page',
   standalone: false,
 
-  templateUrl: './ingest.component.html',
-  styleUrl: './ingest.component.scss',
+  templateUrl: './page.component.html',
+  styleUrl: './page.component.scss',
 })
-export class IngestComponent {
+export class PageComponent {
   extractedText: string = '';
   options: ProductOptions[] = [
     {

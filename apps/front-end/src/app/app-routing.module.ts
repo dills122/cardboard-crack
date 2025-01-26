@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IngestComponent } from './pages/ingest/ingest.component';
 import { ListComponent } from './pages/list/list.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListComponent,
+    component: HomeComponent,
   },
   {
     path: 'list',
@@ -14,11 +14,12 @@ const routes: Routes = [
   },
   {
     path: 'ingest',
-    component: IngestComponent,
+    loadChildren: () =>
+      import('./modules/ingest/ingest.module').then((m) => m.IngestModule),
   },
   {
     path: '**',
-    redirectTo: 'list',
+    redirectTo: '',
   },
 ];
 

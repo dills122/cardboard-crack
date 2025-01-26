@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  standalone: false,
+  standalone: true,
   selector: 'app-topps-disclaimer',
   template: `
     <div class="text-center mt-4">
