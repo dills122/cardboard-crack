@@ -15,9 +15,11 @@ jobs:
         uses: snow-actions/git-config-user@v1.0.0
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
       - name: Verify Change Logs
         run: node common/scripts/install-run-rush.js change --verify
+      - name: Rush Check Dependencies for mismatches
+        run: node common/scripts/install-run-rush.js check
       - name: Rush Install
         run: node common/scripts/install-run-rush.js install
       - name: Rush rebuild
