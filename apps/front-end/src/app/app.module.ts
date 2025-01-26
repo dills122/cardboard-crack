@@ -25,6 +25,7 @@ import { ListComponent } from './pages/list/list.component';
 import { AcronymPipe } from './pipes/acronym.pipe';
 import { HomeComponent } from './pages/home/home.component';
 import { ToppsDisclaimerComponent } from './components/topps-disclaimer/topps-disclaimer.component';
+import { OpenGithubIssuesDirective } from './directives/open-github-issues/open-github-issues.directive';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ToppsDisclaimerComponent } from './components/topps-disclaimer/topps-di
     MessageModule,
     ButtonModule,
     ToppsDisclaimerComponent,
+    OpenGithubIssuesDirective,
   ],
   providers: [
     provideAnimationsAsync(),
