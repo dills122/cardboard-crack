@@ -1,0 +1,51 @@
+<div class="p-8">
+  <!-- Hero Section -->
+  <section class="text-center mb-8">
+    <h1 class="text-3xl font-bold mb-4">Welcome to Cardboard Crack!</h1>
+    <p class="text-lg">
+      Cardboard Crack is a powerful web app designed to streamline your
+      checklist needs. Easily convert soccer card checklists into JSON format,
+      making it simple to view, edit, and export data for your personal or
+      project-based use. Perfect for collectors and enthusiasts, it helps you
+      stay organized and efficient!
+    </p>
+  </section>
+
+  <!-- Features Section -->
+  <section class="my-12 text-center">
+    <h2 class="text-2xl font-semibold mb-6">What You Can Do:</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+      <!-- Ingest Feature -->
+      <div class="p-6 border rounded-lg shadow-sm hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">Ingest PDF Checklists</h3>
+        <p class="mb-4">
+          Upload your soccer card checklist in PDF format, and we'll convert it
+          into structured JSON data. Verify and edit the data before exporting
+          it for use.
+        </p>
+        <a
+          routerLink="/ingest"
+          class="text-blue-600 hover:underline font-semibold"
+          >Go to Ingest View</a
+        >
+      </div>
+
+      <!-- List View Feature -->
+      <div class="p-6 border rounded-lg shadow-md hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">View Parsed Checklists</h3>
+        <p class="mb-4">
+          Access your parsed checklists in an organized and visually appealing
+          list view. Easily manage and browse through your soccer card data.
+        </p>
+        <a
+          routerLink="/list"
+          class="text-blue-600 hover:underline font-semibold"
+          >Go to List View</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <app-topps-disclaimer class="mt-8"></app-topps-disclaimer>
+</div>

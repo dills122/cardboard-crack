@@ -40,6 +40,12 @@ importers:
       '@primeng/themes':
         specifier: ~19.0.5
         version: 19.0.5
+      ace-builds:
+        specifier: ~1.37.5
+        version: 1.37.5
+      fuse.js:
+        specifier: ~7.0.0
+        version: 7.0.0
       pdfjs-dist:
         specifier: ~4.10.38
         version: 4.10.38
@@ -3364,6 +3370,10 @@ packages:
       negotiator: 0.6.3
     dev: true
 
+  /ace-builds@1.37.5:
+    resolution: {integrity: sha512-VMJ4Cnhq6L9dwvOCyuyyvQuiVTSwdZC7zDKJBBBJJax0wGQ7MvzQZFoi0gMmCm2I4Zuv/ZbtwU/dlglIhCNLhw==}
+    dev: false
+
   /acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
     engines: {node: '>=0.4.0'}
@@ -4703,6 +4713,11 @@ packages:
   /function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
     dev: true
+
+  /fuse.js@7.0.0:
+    resolution: {integrity: sha512-14F4hBIxqKvD4Zz/XjDc3y94mNZN6pRv3U13Udo0lNLCWRBUsrMv2xwcF/y/Z5sV6+FQW+/ow68cHpm4sunt8Q==}
+    engines: {node: '>=10'}
+    dev: false
 
   /gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
