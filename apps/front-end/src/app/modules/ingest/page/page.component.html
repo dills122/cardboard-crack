@@ -1,8 +1,8 @@
-<h2 class="p-4 text-xl font-bold">{{ consts.Upload_Header }}</h2>
+<h2 class="p-4 text-xl font-bold">{{ strings.UPLOAD_HEADER }}</h2>
 
 <p-panel class="flex flex-col text-center justify-center w-full space-y-6 pb-4">
   <p-message severity="info" class="text-lg">
-    {{ consts.Parser_Warning_Statement }}
+    {{ strings.PARSER_WARNING_STATEMENT }}
   </p-message>
 
   <app-parser-instructions></app-parser-instructions>
@@ -16,7 +16,7 @@
         accept="application/pdf"
         (onSelect)="onFileSelected($event)"
         mode="basic"
-        chooseLabel="Choose"
+        [chooseLabel]="strings.FILE_UPLOAD_LABEL"
         chooseIcon="pi pi-upload"
         class="w-full"
       ></p-fileUpload>
@@ -26,7 +26,7 @@
         [options]="options"
         [(ngModel)]="selectedOption"
         optionLabel="name"
-        placeholder="Select a Product Type"
+        [placeholder]="strings.PRODUCT_TYPE_SELECT_PLACEHOLDER"
         class="w-full md:w-56"
       />
     </div>
@@ -36,9 +36,9 @@
     <button
       pButton
       type="button"
-      label="Parse Checklist"
+      [label]="strings.PARSE_BUTTON_LABEL"
       class="p-button-primary"
-      pTooltip="Select File & Checklist Type"
+      [pTooltip]="tooltips.PARSE_BUTTON_DISABLED"
       tooltipPosition="bottom"
       [tooltipDisabled]="!shouldDisableParseButton()"
       [disabled]="shouldDisableParseButton()"
@@ -48,7 +48,7 @@
 
   <div class="text-sm m-4">
     <p>
-      {{ consts.Parser_Issues_Message }}
+      {{ strings.PARSER_ISSUES_MESSAGE }}
     </p>
     <div
       appOpenGithubIssues
@@ -61,10 +61,10 @@
 
 <p-divider class="my-8"></p-divider>
 
-<h2 class="p-4 text-xl font-bold">{{ consts.Verify_Header }}</h2>
+<h2 class="p-4 text-xl font-bold">{{ strings.VERIFY_HEADER }}</h2>
 <div class="px-6 space-y-6">
   <p class="text-left">
-    {{ consts.Verify_Main_Message }}
+    {{ strings.VERIFY_MAIN_MESSAGE }}
   </p>
 
   <div>
@@ -72,14 +72,14 @@
   </div>
 
   <div class="flex flex-row items-center space-x-4">
-    <p class="py-2">Once edits are finalized, you can export the data here:</p>
+    <p class="py-2">{{ strings.EXPORT_MESSAGE }}</p>
     <p-button
-      label="Export"
+      [label]="strings.EXPORT_BUTTON_LABEL"
       [raised]="true"
       severity="secondary"
       (onClick)="openExportDialog()"
       [disabled]="shouldDisableExport()"
-      pTooltip="Complete parsing before exporting"
+      [pTooltip]="tooltips.EXPORT_BUTTON_DISABLED"
       tooltipPosition="bottom"
       [tooltipDisabled]="!shouldDisableExport()"
     />
@@ -88,7 +88,7 @@
 
 <div class="p-4">
   <ng-container>
-    <app-json-editor [inputData]="extractedText"></app-json-editor>
+    <app-json-editor #editorEl [inputData]="extractedText"></app-json-editor>
   </ng-container>
 </div>
 <div class="p-4">
