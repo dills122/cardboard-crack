@@ -150,4 +150,8 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
 
     return isFullScreen;
   }
+
+  getEditorData(): string {
+    return this.aceEditor.getValue();
+  }
 }

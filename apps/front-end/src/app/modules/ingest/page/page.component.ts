@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
 import { PdfParserService } from '../../pdf/services/pdf-parser.service';
-import PAGE_CONSTS from '../constants/page.consts';
+import { PAGE_STRINGS, PAGE_TOOLTIPS } from '../constants/page.consts';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ExportDialogComponent } from '../components/export-dialog/export-dialog.component';
+import {
+  ExportDialogComponent,
+  EXPORT_DIALOG_STRINGS,
+} from '../components/export-dialog/export-dialog.component';
+import { JsonEditorComponent } from '../components/json-editor/json-editor.component';
 
 interface ProductOptions {
   name: string;
@@ -18,6 +22,8 @@ interface ProductOptions {
   styleUrl: './page.component.scss',
 })
 export class PageComponent {
+  @ViewChild('editorEl')
+  private editor!: JsonEditorComponent;
   extractedText: string = '';
   options: ProductOptions[] = [
     {
@@ -31,7 +37,8 @@ export class PageComponent {
   ];
   selectedOption: ProductOptions | undefined = this.options[1];
   selectedFilePointer: any;
-  consts = PAGE_CONSTS;
+  strings = PAGE_STRINGS;
+  tooltips = PAGE_TOOLTIPS;
 
   constructor(
     private pdfParserService: PdfParserService,
@@ -75,9 +82,9 @@ export class PageComponent {
 
   openExportDialog() {
     this.dialogService.open(ExportDialogComponent, {
-      header: 'Export Data',
+      header: EXPORT_DIALOG_STRINGS.HEADER_TITLE,
       width: '30%',
-      data: { csvString: this.extractedText },
+      data: { csvString: this.editor.getEditorData() },
     });
   }
 
