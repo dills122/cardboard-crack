@@ -2,12 +2,6 @@
 
 Cardboard Crack is a modern web application designed for trading card enthusiasts. It offers users the ability to upload and view PDF files, making it easy to share and read deck lists, tournament reports, and other card-related documents directly in the app.
 
-## Features
-
-- **PDF Upload and Viewer**: Upload PDF files and view their contents seamlessly within the app.
-- **Modern UI/UX**: Optimized for dark themes with accessible and user-friendly designs.
-- **Responsive Design**: Fully responsive layout, ensuring the app looks great on all devices.
-
 ## Getting Started
 
 ### Prerequisites
