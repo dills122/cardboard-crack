@@ -9,14 +9,12 @@ import {
 } from '@angular/core';
 import * as ace from 'ace-builds';
 
-// Import Ace modules
-import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/theme-twilight';
 import 'ace-builds/src-noconflict/ext-themelist';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-keybinding_menu';
 
-// Set base path for Ace
 ace.config.set('basePath', 'node_modules/ace-builds/src-noconflict');
 
 @Component({
@@ -30,35 +28,28 @@ ace.config.set('basePath', 'node_modules/ace-builds/src-noconflict');
   `,
   styles: [
     `
-      /* Ensure html and body are 100% height */
       html,
       body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
-
-      /* Add styles for fullscreen mode */
       .ace_editor.fixed {
         position: fixed !important;
         top: 0;
         left: 0;
-        width: 100vw; /* Full width */
-        height: 100vh; /* Full height */
-        z-index: 50; /* Bring the editor to front */
+        width: 100vw;
+        height: 100vh;
+        z-index: 50;
       }
-
       body.overflow-hidden {
-        overflow: hidden; /* Disable body scrolling */
+        overflow: hidden;
       }
-
-      /* Ensure editor transitions smoothly */
       .ace_editor {
         transition: all 0.3s ease-in-out;
       }
-
       .ace_editor.bg-white {
-        background-color: white; /* Optional change in background */
+        background-color: white;
       }
     `,
   ],
@@ -81,11 +72,12 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
     this.aceEditor = ace.edit(this.editor.nativeElement);
 
     this.aceEditor.setOptions({
+      useWorker: false,
       autoScrollEditorIntoView: true,
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
       theme: 'ace/theme/twilight',
-      mode: 'ace/mode/javascript',
+      mode: 'ace/mode/json',
     });
 
     this.aceEditor.setReadOnly(true);
