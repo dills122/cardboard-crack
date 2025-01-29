@@ -4,9 +4,15 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-panel-card',
   standalone: false,
-
-  templateUrl: './panel-card.component.html',
-  styleUrl: './panel-card.component.scss',
+  template: ` <div class="card my-4">
+    <p-panel
+      [header]="header"
+      [toggleable]="toggleHeader | async"
+      [toggler]="'header'"
+    >
+      <ng-content></ng-content>
+    </p-panel>
+  </div>`,
 })
 export class PanelCardComponent {
   @Input({
