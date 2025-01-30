@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageComponent } from './page.component';
+import { PdfParserService } from '../../pdf/services/pdf-parser.service';
+import { DialogService } from 'primeng/dynamicdialog';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -8,9 +10,9 @@ describe('PageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PageComponent]
-    })
-    .compileComponents();
+      declarations: [PageComponent],
+      providers: [PdfParserService, DialogService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PageComponent);
     component = fixture.componentInstance;
