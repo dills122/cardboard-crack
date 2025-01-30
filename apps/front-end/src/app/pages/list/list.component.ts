@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import checklist from '../../../../public/topps-ucc-checklist.json';
-import { CardModel } from '../../models/card.model';
+import { CardModel } from '../../modules/pdf/models/card.model';
 
 @Component({
   selector: 'app-list',

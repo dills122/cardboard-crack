@@ -6,7 +6,9 @@ describe('PdfParserService', () => {
   let service: PdfParserService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [PdfParserService],
+    });
     service = TestBed.inject(PdfParserService);
   });
 
