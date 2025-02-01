@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PdfParserService } from './pdf-parser.service';
+import { PdfService } from './pdf.service';
 
 describe('PdfParserService', () => {
-  let service: PdfParserService;
+  let service: PdfService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PdfParserService],
+      providers: [PdfService],
     });
-    service = TestBed.inject(PdfParserService);
+    service = TestBed.inject(PdfService);
   });
 
   it('should be created', () => {

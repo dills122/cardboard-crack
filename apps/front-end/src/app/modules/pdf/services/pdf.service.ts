@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import ChecklistParser from '../pdf-parser/pdf-parser';
+import ChecklistParser, { CardObject } from '../pdf-parser/pdf-parser';
 import { PDFDocumentProxy } from 'pdfjs-dist';
+import { isSameShape } from '../verifier/shape';
 
 @Injectable()
-export class PdfParserService {
+export class PdfService {
   private parser: ChecklistParser;
 
   constructor() {
@@ -15,5 +16,9 @@ export class PdfParserService {
     isInternationalTeamProduct?: boolean
   ) {
     return await this.parser.parse(pdfData, isInternationalTeamProduct);
+  }
+
+  async validateChecklist(checklist: CardObject[]) {
+    return isSameShape(checklist);
   }
 }

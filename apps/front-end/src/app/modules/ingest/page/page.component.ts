@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
-import { PdfParserService } from '../../pdf/services/pdf-parser.service';
+import { PdfService } from '../../pdf/services/pdf.service';
 import { PAGE_STRINGS, PAGE_TOOLTIPS } from '../constants/page.consts';
 import { DialogService } from 'primeng/dynamicdialog';
 import {
@@ -41,7 +41,7 @@ export class PageComponent {
   tooltips = PAGE_TOOLTIPS;
 
   constructor(
-    private pdfParserService: PdfParserService,
+    private pdfService: PdfService,
     private dialogService: DialogService
   ) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
@@ -70,7 +70,7 @@ export class PageComponent {
   async extractTextFromPdf(pdfData: Uint8Array): Promise<void> {
     try {
       const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-      const data = await this.pdfParserService.parseData(
+      const data = await this.pdfService.parseData(
         pdf,
         this.selectedOption?.code === 'INIT'
       );

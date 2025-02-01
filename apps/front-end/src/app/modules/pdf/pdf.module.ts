@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PdfParserService } from './services/pdf-parser.service';
+import { PdfService } from './services/pdf.service';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [PdfParserService],
+  providers: [PdfService],
 })
 export class PdfModule {}

@@ -10,46 +10,37 @@ export interface ShapeCheckResult {
 
 export function isSameShape(list: CardModel[]): ShapeCheckResult {
   if (list.length === 0) {
-    return { isValid: true, validationStatus: 'valid', issues: {} as Issues };
+    return { isValid: true, issues: {} as Issues, validationStatus: 'valid' };
   }
 
   const keys = Object.keys(list[0]) as CardModelKeys[];
-  const issues: Issues = {} as Issues;
-  let hasAnyValidData = false;
+  const issues = {} as Issues;
+  let allNullOrUndefined = true;
+  const nonNullTracker: Partial<Record<CardModelKeys, boolean>> = {};
 
-  // Track properties that are entirely null/undefined
-  const fullyNullKeys = new Set<CardModelKeys>(keys);
-
+  // Pass 1: Identify non-null properties and check if all rows are empty
   for (const obj of list) {
-    let objHasData = false;
-
+    let rowHasValue = false;
     for (const key of keys) {
-      const value = obj[key];
-
-      if (value !== null && value !== undefined) {
-        objHasData = true;
-        hasAnyValidData = true;
-        fullyNullKeys.delete(key); // If we find a non-null value, it's not fully null
+      if (obj[key] !== null && obj[key] !== undefined) {
+        nonNullTracker[key] = true;
+        rowHasValue = true;
       }
     }
-
-    if (!objHasData) {
-      // If any object is completely empty, mark it as an error
-      return {
-        isValid: false,
-        validationStatus: 'error',
-        issues: {} as Issues,
-      };
+    if (rowHasValue) {
+      allNullOrUndefined = false;
     }
   }
 
-  // Second pass to collect issues (ignoring fully null/undefined keys)
+  if (allNullOrUndefined) {
+    return { isValid: false, issues: {} as Issues, validationStatus: 'error' };
+  }
+
+  // Pass 2: Identify issues (only for keys that had at least one value)
   for (const obj of list) {
     for (const key of keys) {
-      if (
-        !fullyNullKeys.has(key) &&
-        (obj[key] === null || obj[key] === undefined)
-      ) {
+      if (!nonNullTracker[key]) continue; // Skip columns that are fully null
+      if (obj[key] === null || obj[key] === undefined) {
         (issues[key] ||= []).push(obj);
       }
     }
@@ -58,7 +49,7 @@ export function isSameShape(list: CardModel[]): ShapeCheckResult {
   const isValid = Object.keys(issues).length === 0;
   return {
     isValid,
-    validationStatus: isValid ? 'valid' : 'partial',
     issues,
+    validationStatus: isValid ? 'valid' : 'partial',
   };
 }
