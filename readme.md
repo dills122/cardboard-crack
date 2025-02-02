@@ -1,6 +1,6 @@
 # Cardboard Crack
 
-Cardboard Crack is a modern web application designed for trading card enthusiasts. It offers users the ability to upload and view PDF files, making it easy to share and read deck lists, tournament reports, and other card-related documents directly in the app.
+Cardboard Crack is a modern web application designed with soccer fans in mind. It offers users the ability to upload PDF based checlists and parse into a more usable format (JSON), and also offers a nice built in view for the parsed JSON checklist.
 
 ## Getting Started
 
@@ -52,7 +52,7 @@ The app will be available at `http://localhost:4200/`.
 
 Parsing Page
 
-![Parsing View](/assets/parsing-view.png)
+![Parsing View](/assets/parsing-view-updated.png)
 
 Partial View of List Page
 
