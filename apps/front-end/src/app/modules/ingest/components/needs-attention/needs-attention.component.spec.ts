@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NeedsAttentionComponent } from './needs-attention.component';
+import { PdfModule } from '../../../pdf/pdf.module';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 describe('NeedsAttentionComponent', () => {
   let component: NeedsAttentionComponent;
@@ -8,16 +11,17 @@ describe('NeedsAttentionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NeedsAttentionComponent]
-    })
-    .compileComponents();
+      declarations: [NeedsAttentionComponent],
+      imports: [PdfModule, BadgeModule, OverlayBadgeModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NeedsAttentionComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.checklist = {};
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });
