@@ -1,4 +1,5 @@
-import ChecklistParser, { CardObject } from './pdf-parser';
+import { CardModel } from '../models/card.model';
+import ChecklistParser from './pdf-parser';
 
 describe('PDF Parser', () => {
   describe('utils', () => {
@@ -81,7 +82,7 @@ describe('PDF Parser', () => {
     });
 
     it('checkIfCardHasNoCardNumberButAllOthersAreSet', () => {
-      const passCheck: CardObject = {
+      const passCheck: CardModel = {
         cardNumber: null,
         club: 'CLUB',
         player: 'PLAYER',
@@ -90,7 +91,7 @@ describe('PDF Parser', () => {
       expect(
         pdfParserObj['checkIfCardHasNoCardNumberButAllOthersAreSet'](passCheck)
       ).toBeTruthy();
-      const failCheck: CardObject = {
+      const failCheck: CardModel = {
         cardNumber: 'NUM',
         club: 'CLUB',
         player: 'PLAYER',
@@ -101,7 +102,7 @@ describe('PDF Parser', () => {
       ).toBeFalsy();
     });
     it('checkIfCardHasAtleastCardNumAndSomeOthers', () => {
-      const allSetObj: CardObject = {
+      const allSetObj: CardModel = {
         cardNumber: 'AB',
         club: 'CLUB',
         player: 'PLAYER',
@@ -110,7 +111,7 @@ describe('PDF Parser', () => {
       expect(
         pdfParserObj['checkIfCardHasAtleastCardNumAndSomeOthers'](allSetObj)
       ).toBeTruthy();
-      const mostSetObj: CardObject = {
+      const mostSetObj: CardModel = {
         cardNumber: 'AB',
         club: 'CLUB',
         player: null,
@@ -119,7 +120,7 @@ describe('PDF Parser', () => {
       expect(
         pdfParserObj['checkIfCardHasAtleastCardNumAndSomeOthers'](mostSetObj)
       ).toBeTruthy();
-      const noCardNum: CardObject = {
+      const noCardNum: CardModel = {
         cardNumber: null,
         club: 'CLUB',
         player: 'PLAYER',
@@ -128,7 +129,7 @@ describe('PDF Parser', () => {
       expect(
         pdfParserObj['checkIfCardHasAtleastCardNumAndSomeOthers'](noCardNum)
       ).toBeFalsy();
-      const nonSet: CardObject = {
+      const nonSet: CardModel = {
         cardNumber: null,
         club: null,
         player: null,

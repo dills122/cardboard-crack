@@ -8,6 +8,11 @@ export interface ShapeCheckResult {
   issues: Issues;
 }
 
+/**
+ * Detect any missing and/or mismatched data given a set of card objects
+ * @param {CardModel[]} list of CardModels
+ * @returns {ShapeCheckResult}
+ */
 export function isSameShape(list: CardModel[]): ShapeCheckResult {
   if (list.length === 0) {
     return { isValid: true, issues: {} as Issues, validationStatus: 'valid' };

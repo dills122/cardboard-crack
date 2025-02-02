@@ -15,8 +15,8 @@ describe('Shape', () => {
 
   it('should return true if list items are same shape', () => {
     const given: CardModel[] = [
-      { cardNumber: '123', player: 'John', club: 'A', type: 'Gold' },
-      { cardNumber: '456', player: 'Doe', club: 'B', type: 'Silver' },
+      { cardNumber: '123', player: 'John', club: 'A', type: 'veteran' },
+      { cardNumber: '456', player: 'Doe', club: 'B', type: 'veteran' },
     ];
 
     const result = isSameShape(given);
@@ -29,9 +29,9 @@ describe('Shape', () => {
 
   it('should return issue rows if any found', () => {
     const given: CardModel[] = [
-      { cardNumber: '123', player: 'John', club: 'A', type: 'Gold' },
-      { cardNumber: '456', player: 'Doe', club: null, type: 'Silver' }, // `club` is missing
-      { cardNumber: '789', player: null, club: 'C', type: 'Bronze' }, // `player` is missing
+      { cardNumber: '123', player: 'John', club: 'A', type: 'veteran' },
+      { cardNumber: '456', player: 'Doe', club: null, type: 'rookie' }, // `club` is missing
+      { cardNumber: '789', player: null, club: 'C', type: 'retired' }, // `player` is missing
     ];
 
     const result = isSameShape(given);
@@ -45,7 +45,7 @@ describe('Shape', () => {
       cardNumber: '456',
       player: 'Doe',
       club: null,
-      type: 'Silver',
+      type: 'rookie',
     });
     const issuesWithPlayerProp = issues.player;
     expect(issuesWithPlayerProp.length).toEqual(1);
@@ -53,16 +53,16 @@ describe('Shape', () => {
       cardNumber: '789',
       player: null,
       club: 'C',
-      type: 'Bronze',
+      type: 'retired',
     });
   });
 
   it('should return issue rows if any found, multiple in each category', () => {
     const given: CardModel[] = [
-      { cardNumber: '123', player: 'John', club: 'A', type: 'Gold' },
-      { cardNumber: '456', player: 'Doe', club: null, type: 'Silver' },
-      { cardNumber: '789', player: null, club: 'C', type: 'Bronze' },
-      { cardNumber: '289', player: null, club: 'Z', type: 'Triple Gold' },
+      { cardNumber: '123', player: 'John', club: 'A', type: 'veteran' },
+      { cardNumber: '456', player: 'Doe', club: null, type: 'veteran' },
+      { cardNumber: '789', player: null, club: 'C', type: 'veteran' },
+      { cardNumber: '289', player: null, club: 'Z', type: 'veteran' },
     ];
 
     const result = isSameShape(given);
@@ -76,7 +76,7 @@ describe('Shape', () => {
       cardNumber: '456',
       player: 'Doe',
       club: null,
-      type: 'Silver',
+      type: 'veteran',
     });
     const issuesWithPlayerProp = issues.player;
     expect(issuesWithPlayerProp.length).toEqual(2);
@@ -84,22 +84,22 @@ describe('Shape', () => {
       cardNumber: '789',
       player: null,
       club: 'C',
-      type: 'Bronze',
+      type: 'veteran',
     });
     expect(issuesWithPlayerProp[1]).toEqual({
       cardNumber: '289',
       player: null,
       club: 'Z',
-      type: 'Triple Gold',
+      type: 'veteran',
     });
   });
 
   it('should NOT flag a null column/property if all of that property is null in the list', () => {
     const given: CardModel[] = [
-      { cardNumber: '123', player: 'John', club: null, type: 'Gold' },
-      { cardNumber: '456', player: 'Doe', club: null, type: 'Silver' },
-      { cardNumber: '789', player: 'Bob', club: null, type: 'Bronze' },
-      { cardNumber: '289', player: 'Joe', club: null, type: 'Triple Gold' },
+      { cardNumber: '123', player: 'John', club: null, type: 'veteran' },
+      { cardNumber: '456', player: 'Doe', club: null, type: 'veteran' },
+      { cardNumber: '789', player: 'Bob', club: null, type: 'veteran' },
+      { cardNumber: '289', player: 'Joe', club: null, type: 'veteran' },
     ];
     const result = isSameShape(given);
     expect(result).toBeDefined();
@@ -111,9 +111,9 @@ describe('Shape', () => {
 
   it('should only flag mis-match & ignore the fully null club column', () => {
     const given: CardModel[] = [
-      { cardNumber: '123', player: 'John', club: null, type: 'Gold' },
-      { cardNumber: '456', player: 'Doe', club: null, type: 'Silver' },
-      { cardNumber: '789', player: 'Bob', club: null, type: 'Bronze' },
+      { cardNumber: '123', player: 'John', club: null, type: 'veteran' },
+      { cardNumber: '456', player: 'Doe', club: null, type: 'veteran' },
+      { cardNumber: '789', player: 'Bob', club: null, type: 'veteran' },
       { cardNumber: '289', player: 'Joe', club: null, type: null },
     ];
     const result = isSameShape(given);

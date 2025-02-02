@@ -13,7 +13,7 @@ describe('Shape-Stress', () => {
         cardNumber: i.toString(),
         player: `Player${i}`,
         club: i % 2 === 0 ? 'ClubA' : i % 5 ? null : 'ClubB', // Alternating club values
-        type: i % 3 === 0 ? null : 'Standard', // Inject some null values
+        type: i % 3 === 0 ? null : 'veteran', // Inject some null values
       })
     );
 
