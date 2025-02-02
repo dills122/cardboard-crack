@@ -8,6 +8,7 @@ import {
   EXPORT_DIALOG_STRINGS,
 } from '../components/export-dialog/export-dialog.component';
 import { JsonEditorComponent } from '../components/json-editor/json-editor.component';
+import { ChecklistMap } from '../../pdf/models/checklist.model';
 
 interface ProductOptions {
   name: string;
@@ -39,6 +40,7 @@ export class PageComponent {
   selectedFilePointer: any;
   strings = PAGE_STRINGS;
   tooltips = PAGE_TOOLTIPS;
+  jsonChecklist: ChecklistMap | undefined;
 
   constructor(
     private pdfService: PdfService,
@@ -74,6 +76,7 @@ export class PageComponent {
         pdf,
         this.selectedOption?.code === 'INIT'
       );
+      this.jsonChecklist = data;
       this.extractedText = JSON.stringify(data, null, 4);
     } catch (err) {
       console.error(err);

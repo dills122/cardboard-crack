@@ -1,25 +1,28 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PageComponent } from './page/page.component';
-import { SelectModule } from 'primeng/select';
-import { MessageModule } from 'primeng/message';
-import { FileUploadModule } from 'primeng/fileupload';
+import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
 import { DividerModule } from 'primeng/divider';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { MessageModule } from 'primeng/message';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { PanelModule } from 'primeng/panel';
 import { ScrollTopModule } from 'primeng/scrolltop';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { JsonEditorComponent } from './components/json-editor/json-editor.component';
+import { SelectModule } from 'primeng/select';
+import { TooltipModule } from 'primeng/tooltip';
 
-import { PdfModule } from '../pdf/pdf.module';
 import { ToppsDisclaimerComponent } from '../../components/topps-disclaimer/topps-disclaimer.component';
-import { IngestRoutingModule } from './ingest-routing.module';
-import { KeyboardShortcutsPanelComponent } from './components/keyboard-shortcuts-panel/keyboard-shortcuts-panel.component';
-import { ParserInstructionsComponent } from './components/parser-instructions/parser-instructions.component';
 import { OpenGithubIssuesDirective } from '../../directives/open-github-issues/open-github-issues.directive';
+import { PdfModule } from '../pdf/pdf.module';
 import { ExportDialogComponent } from './components/export-dialog/export-dialog.component';
+import { JsonEditorComponent } from './components/json-editor/json-editor.component';
+import { KeyboardShortcutsPanelComponent } from './components/keyboard-shortcuts-panel/keyboard-shortcuts-panel.component';
+import { NeedsAttentionComponent } from './components/needs-attention/needs-attention.component';
+import { ParserInstructionsComponent } from './components/parser-instructions/parser-instructions.component';
+import { IngestRoutingModule } from './ingest-routing.module';
+import { PageComponent } from './page/page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { ExportDialogComponent } from './components/export-dialog/export-dialog.
     KeyboardShortcutsPanelComponent,
     ParserInstructionsComponent,
     ExportDialogComponent,
+    NeedsAttentionComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,8 @@ import { ExportDialogComponent } from './components/export-dialog/export-dialog.
     ButtonModule,
     TooltipModule,
     DynamicDialogModule,
+    BadgeModule,
+    OverlayBadgeModule,
     ToppsDisclaimerComponent,
     IngestRoutingModule,
     OpenGithubIssuesDirective,

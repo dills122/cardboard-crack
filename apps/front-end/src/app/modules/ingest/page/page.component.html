@@ -72,6 +72,7 @@
   </div>
 
   <div class="flex flex-row items-center space-x-4">
+    <app-needs-attention *ngIf="jsonChecklist" [checklist]="jsonChecklist"></app-needs-attention>
     <p class="py-2">{{ strings.EXPORT_MESSAGE }}</p>
     <p-button
       [label]="strings.EXPORT_BUTTON_LABEL"
