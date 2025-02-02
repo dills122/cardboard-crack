@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
-import { PdfParserService } from '../../pdf/services/pdf-parser.service';
+import { PdfService } from '../../pdf/services/pdf.service';
 import { PAGE_STRINGS, PAGE_TOOLTIPS } from '../constants/page.consts';
 import { DialogService } from 'primeng/dynamicdialog';
 import {
@@ -8,6 +8,7 @@ import {
   EXPORT_DIALOG_STRINGS,
 } from '../components/export-dialog/export-dialog.component';
 import { JsonEditorComponent } from '../components/json-editor/json-editor.component';
+import { ChecklistMap } from '../../pdf/models/checklist.model';
 
 interface ProductOptions {
   name: string;
@@ -39,9 +40,10 @@ export class PageComponent {
   selectedFilePointer: any;
   strings = PAGE_STRINGS;
   tooltips = PAGE_TOOLTIPS;
+  jsonChecklist: ChecklistMap | undefined;
 
   constructor(
-    private pdfParserService: PdfParserService,
+    private pdfService: PdfService,
     private dialogService: DialogService
   ) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
@@ -70,10 +72,11 @@ export class PageComponent {
   async extractTextFromPdf(pdfData: Uint8Array): Promise<void> {
     try {
       const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-      const data = await this.pdfParserService.parseData(
+      const data = await this.pdfService.parseData(
         pdf,
         this.selectedOption?.code === 'INIT'
       );
+      this.jsonChecklist = data;
       this.extractedText = JSON.stringify(data, null, 4);
     } catch (err) {
       console.error(err);

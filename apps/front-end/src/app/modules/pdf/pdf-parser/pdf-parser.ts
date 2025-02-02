@@ -1,30 +1,14 @@
 /* eslint-disable import/no-named-as-default */
 import FuzzyClubMatcher from '../club-matcher/fuzzy-match-club';
 import { PDFDocumentProxy } from 'pdfjs-dist';
-
-export interface CardObject {
-  cardNumber: string | null;
-  player: string | null;
-  club: string | null;
-  type: cardType | null;
-}
-
-export interface ChecklistMap {
-  [key: string]: CardObject[];
-}
-
-export const cardTypes = ['veteran', 'rookie', 'retired', 'debutant'] as const;
-
-export type cardType = (typeof cardTypes)[number];
-
-export const isCardType = (value: string): value is cardType => {
-  return (cardTypes as readonly string[]).includes(value);
-};
+import { CardModel } from '../models/card.model';
+import { ChecklistMap } from '../models/checklist.model';
+import { cardType, isCardType } from '../models/card-type.model';
 
 export default class ChecklistParser {
   private fuzzyClubMatcher: FuzzyClubMatcher;
   private currentCategory: string | null | undefined;
-  private card: CardObject = {
+  private card: CardModel = {
     cardNumber: null,
     player: null,
     club: null,
@@ -134,7 +118,7 @@ export default class ChecklistParser {
     };
   }
 
-  private checkIfCardHasAtleastCardNumAndSomeOthers(card: CardObject): boolean {
+  private checkIfCardHasAtleastCardNumAndSomeOthers(card: CardModel): boolean {
     if (!card) {
       return false;
     }
@@ -143,7 +127,7 @@ export default class ChecklistParser {
   }
 
   private checkIfCardHasNoCardNumberButAllOthersAreSet(
-    card: CardObject
+    card: CardModel
   ): boolean {
     if (!card) {
       return false;
