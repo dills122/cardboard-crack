@@ -18,7 +18,10 @@ export function isSameShape(list: CardModel[]): ShapeCheckResult {
     return { isValid: true, issues: {} as Issues, validationStatus: 'valid' };
   }
 
-  const keys = Object.keys(list[0]) as CardModelKeys[];
+  //Ignore generated id column from shape detection
+  const keys = Object.keys(list[0]).filter(
+    (key) => key !== 'id'
+  ) as CardModelKeys[];
   const issues = {} as Issues;
   let allNullOrUndefined = true;
   const nonNullTracker: Partial<Record<CardModelKeys, boolean>> = {};

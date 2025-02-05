@@ -98,4 +98,19 @@ export class PageComponent {
   shouldDisableExport(): boolean {
     return !this.extractedText || this.extractedText.length <= 0;
   }
+
+  onEditorLoaded(editor: any) {
+    console.log('Ace Editor is ready!', editor);
+    this.editor.getAllEditorsLines();
+
+    // Example: Add an annotation after loading
+    // editor.getSession().setAnnotations([
+    //   {
+    //     row: 2, // Line number (zero-based)
+    //     column: 0,
+    //     text: 'Sample annotation',
+    //     type: 'warning',
+    //   },
+    // ]);
+  }
 }

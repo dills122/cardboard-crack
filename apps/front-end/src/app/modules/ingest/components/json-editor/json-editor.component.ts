@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -60,11 +62,20 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
   @Input()
   inputData!: string;
   aceEditor!: ace.Ace.Editor;
+  /**
+   * Emits when the editor has finished loading
+   */
+  @Output() editorReady = new EventEmitter<boolean>();
+  /**
+   * Currently will only emit when new data is pushed to the editor, not when data in the editor is changed
+   */
+  @Output() editorDataChanged = new EventEmitter<boolean>();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.aceEditor && changes['inputData']) {
       this.aceEditor.session.setValue(this.inputData || '');
       this.aceEditor.setReadOnly(false);
+      this.editorDataChanged.emit(true);
     }
   }
 
@@ -115,6 +126,8 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
     if (this.inputData) {
       this.aceEditor.session.setValue(this.inputData);
     }
+
+    this.editorReady.emit(true);
   }
 
   toggleFullScreen(): boolean {
@@ -145,5 +158,13 @@ export class JsonEditorComponent implements AfterViewInit, OnChanges {
 
   getEditorData(): string {
     return this.aceEditor.getValue();
+  }
+
+  getAllEditorsLines() {
+    return this.getEditorSession().getDocument().getAllLines();
+  }
+
+  private getEditorSession() {
+    return this.aceEditor.getSession();
   }
 }
