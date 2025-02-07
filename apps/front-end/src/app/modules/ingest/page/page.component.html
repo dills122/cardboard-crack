@@ -89,7 +89,7 @@
 
 <div class="p-4">
   <ng-container>
-    <app-json-editor #editorEl [inputData]="extractedText"></app-json-editor>
+    <app-json-editor #editorEl [inputData]="extractedText" (editorReady)="onEditorLoaded($event)"></app-json-editor>
   </ng-container>
 </div>
 <div class="p-4">

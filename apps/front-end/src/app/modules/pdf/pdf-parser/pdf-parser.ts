@@ -4,11 +4,13 @@ import { PDFDocumentProxy } from 'pdfjs-dist';
 import { CardModel } from '../models/card.model';
 import { ChecklistMap } from '../models/checklist.model';
 import { cardType, isCardType } from '../models/card-type.model';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class ChecklistParser {
   private fuzzyClubMatcher: FuzzyClubMatcher;
   private currentCategory: string | null | undefined;
   private card: CardModel = {
+    id: undefined,
     cardNumber: null,
     player: null,
     club: null,
@@ -105,12 +107,16 @@ export default class ChecklistParser {
 
   private pushCardObjToMap() {
     if (!this.currentCategory) return;
-    this.textMap[this.currentCategory].push(this.card);
+    this.textMap[this.currentCategory].push({
+      ...this.card,
+      id: uuidv4(),
+    });
     this.resetCardObj();
   }
 
   private resetCardObj() {
     this.card = {
+      id: undefined,
       cardNumber: null,
       player: null,
       club: null,

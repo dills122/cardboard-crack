@@ -1,5 +1,6 @@
 import { CardModel } from '../models/card.model';
 import ChecklistParser from './pdf-parser';
+import { v4 as uuidv4 } from 'uuid';
 
 describe('PDF Parser', () => {
   describe('utils', () => {
@@ -83,6 +84,7 @@ describe('PDF Parser', () => {
 
     it('checkIfCardHasNoCardNumberButAllOthersAreSet', () => {
       const passCheck: CardModel = {
+        id: uuidv4(),
         cardNumber: null,
         club: 'CLUB',
         player: 'PLAYER',
@@ -92,6 +94,7 @@ describe('PDF Parser', () => {
         pdfParserObj['checkIfCardHasNoCardNumberButAllOthersAreSet'](passCheck)
       ).toBeTruthy();
       const failCheck: CardModel = {
+        id: uuidv4(),
         cardNumber: 'NUM',
         club: 'CLUB',
         player: 'PLAYER',
@@ -103,6 +106,7 @@ describe('PDF Parser', () => {
     });
     it('checkIfCardHasAtleastCardNumAndSomeOthers', () => {
       const allSetObj: CardModel = {
+        id: uuidv4(),
         cardNumber: 'AB',
         club: 'CLUB',
         player: 'PLAYER',
@@ -112,6 +116,7 @@ describe('PDF Parser', () => {
         pdfParserObj['checkIfCardHasAtleastCardNumAndSomeOthers'](allSetObj)
       ).toBeTruthy();
       const mostSetObj: CardModel = {
+        id: uuidv4(),
         cardNumber: 'AB',
         club: 'CLUB',
         player: null,
@@ -121,6 +126,7 @@ describe('PDF Parser', () => {
         pdfParserObj['checkIfCardHasAtleastCardNumAndSomeOthers'](mostSetObj)
       ).toBeTruthy();
       const noCardNum: CardModel = {
+        id: uuidv4(),
         cardNumber: null,
         club: 'CLUB',
         player: 'PLAYER',
@@ -130,6 +136,7 @@ describe('PDF Parser', () => {
         pdfParserObj['checkIfCardHasAtleastCardNumAndSomeOthers'](noCardNum)
       ).toBeFalsy();
       const nonSet: CardModel = {
+        id: uuidv4(),
         cardNumber: null,
         club: null,
         player: null,

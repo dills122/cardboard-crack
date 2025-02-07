@@ -1,5 +1,6 @@
 import { isSameShape, Issues } from './shape';
 import { CardModel } from '../models/card.model';
+import { v4 as uuidv4 } from 'uuid';
 
 describe('Shape-Stress', () => {
   it('should process a massive dataset efficiently', () => {
@@ -10,6 +11,7 @@ describe('Shape-Stress', () => {
     const largeTestData: CardModel[] = Array.from(
       { length: NUM_RECORDS },
       (_, i) => ({
+        id: uuidv4(),
         cardNumber: i.toString(),
         player: `Player${i}`,
         club: i % 2 === 0 ? 'ClubA' : i % 5 ? null : 'ClubB', // Alternating club values
